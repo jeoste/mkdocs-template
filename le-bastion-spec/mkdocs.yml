@@ -1,4 +1,4 @@
-site_name: Le Bastion (specs)
+site_name: Le Bastion
 nav:
   - Home: index.md
   - Admonition: admonition.md
@@ -10,9 +10,10 @@ theme:
   name: material
   features:
     - navigation.footer
+  logo: assets/shield-fedeaf.png
   favicon: assets/favicon.ico
   icon:
-    logo: simple/vault
+    #logo: simple/vault
   font:
     text: Inter
     code: Roboto Mono
@@ -20,10 +21,10 @@ theme:
     # Dark Mode
     - scheme: slate
       toggle:
-        icon: material/weather-sunny
+        icon: material/white-balance-sunny
         name: Dark mode
-      primary: indigo
-      accent: deep orange
+      primary: navy blue
+      accent: orange
 
     # Light Mode
     - scheme: default
