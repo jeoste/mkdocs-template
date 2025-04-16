@@ -21,4 +21,5 @@ This is a emoji test :soccer:
 
 Continue the setup here : https://jameswillett.dev/getting-started-with-material-for-mkdocs/#setting-logo-to-an-image
 
-And here (14 36) : https://www.youtube.com/watch?v=xlABhbnNrfI        
+And here (14 36) : https://www.youtube.com/watch?v=xlABhbnNrfI
+

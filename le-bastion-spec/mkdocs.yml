@@ -1,12 +1,15 @@
 site_name: Le Bastion (specs)
 nav:
   - Home: index.md
+  - Admonition: admonition.md
   - Clients:
     - Uperio: uperio.md
     - Alliance Marine: alliance-marine.md
   - About: about.md
 theme: 
   name: material
+  features:
+    - navigation.footer
   favicon: assets/favicon.ico
   icon:
     logo: simple/vault
@@ -35,3 +38,15 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+extra:
+  social:
+    - icon: material/github
+      link: https://youtube.com/@test
+    - icon: material/linkedin
+      link: https://linkedin.com/in/test
+
+copyright: Copyright &copy; 2024 Jeoffrey Stéphan
