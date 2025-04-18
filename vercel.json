@@ -2,6 +2,5 @@
   "buildCommand": "pip install -r requirements.txt && mkdocs build",
   "outputDirectory": "site",
   "installCommand": "python -m pip install --upgrade pip",
-  "devCommand": "mkdocs serve",
-  "builds": [{ "src": "**", "use": "@vercel/python" }]
+  "devCommand": "mkdocs serve"
 } 
