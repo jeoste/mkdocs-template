@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pip install -r requirements.txt && mkdocs build -d public",
+  "outputDirectory": "public",
+  "installCommand": "pip install -r requirements.txt",
+  "framework": null
+} 
