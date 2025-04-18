@@ -1,10 +1,4 @@
 # netlify.toml
 [build]
   command = "mkdocs build"
-  publish = "site/"
-  environment = { PYTHON_VERSION = "3.12.4" }
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  publish = "site"
