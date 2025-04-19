@@ -2,15 +2,17 @@ site_name: Le Bastion
 nav:
   - Home: index.md
   - Admonition: admonition.md
-  - Clients:
-    - Uperio: uperio.md
-    - Alliance Marine: alliance-marine.md
+  - Private:
+    - Clients:
+      - Uperio: uperio.md
+      - Alliance Marine: alliance-marine.md
   - About: about.md
+  - Login: login.md
 theme: 
   name: material
   features:
     - navigation.footer
-  logo: assets/shield-fedeaf.png
+  logo: assets/shield-logo.png
   favicon: assets/favicon.ico
   icon:
     #logo: simple/vault
@@ -23,16 +25,16 @@ theme:
       toggle:
         icon: material/white-balance-sunny
         name: Dark mode
-      primary: navy blue
-      accent: orange
+      primary: orange
+      accent: cyan
 
     # Light Mode
     - scheme: default
       toggle:
         icon: material/weather-night
         name: Light mode
-      primary: blue
-      accent: deep orange
+      primary: cyan
+      accent: orange
 
 markdown_extensions:
   - attr_list
@@ -46,8 +48,11 @@ markdown_extensions:
 extra:
   social:
     - icon: material/github
-      link: https://youtube.com/@test
-    - icon: material/linkedin
-      link: https://linkedin.com/in/test
+      link: https://github.com/jeoste
+    - icon: material/web
+      link: https://linktr.ee/jeoste
+
+extra_javascript:
+  - assets/js/auth.js
 
 copyright: Copyright &copy; 2024 Jeoffrey Stéphan

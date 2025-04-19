@@ -1,4 +1,17 @@
 # netlify.toml
 [build]
-  command = "mkdocs build"
+  command = "mkdocs build && bash netlify-build.sh"
   publish = "site"
+
+# Copier les fichiers .htaccess et .htpasswd dans le dossier de publication
+[[plugins]]
+  package = "@netlify/plugin-functions-core"
+
+[[plugins]]
+  package = "netlify-plugin-inline-critical-css"
+
+# Configuration pour l'authentification HTTP Basic
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Basic-Auth = "admin:test123, guest:guest"
