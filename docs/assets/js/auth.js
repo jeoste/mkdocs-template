@@ -229,145 +229,73 @@ function setupDOMObserver() {
   return observer;
 }
 
+// Fonction pour vérifier l'authentification via les en-têtes HTTP Basic
+function checkHttpAuthentication() {
+  const auth = document.cookie.match(/netlify-auth-token=([^;]*)/);
+  
+  if (auth && auth[1]) {
+    // L'utilisateur est authentifié via Netlify
+    try {
+      // Tenter d'obtenir le nom d'utilisateur depuis les cookies ou le localStorage
+      const username = localStorage.getItem('username') || 'invite';
+      
+      // Stocker l'authentification dans sessionStorage pour notre script
+      sessionStorage.setItem('auth', btoa(`${username}:password`));
+      
+      // Si le nom d'utilisateur est connu comme admin, afficher les éléments privés
+      if (isAdmin(username)) {
+        showPrivateMenuItems();
+      } else {
+        hidePrivateMenuItems();
+      }
+    } catch (e) {
+      console.error('Erreur lors de la vérification de l\'authentification:', e);
+      hidePrivateMenuItems();
+    }
+  } else {
+    // Pas d'authentification Netlify, masquer les éléments privés
+    hidePrivateMenuItems();
+  }
+}
+
 // Fonction principale exécutée immédiatement
 (function() {
-  // Bloquer immédiatement l'accès aux pages protégées
-  blockProtectedPages();
+  // Vérifier d'abord l'authentification HTTP
+  checkHttpAuthentication();
   
-  // Vérifier si l'utilisateur est admin
-  const auth = sessionStorage.getItem('auth');
-  if (auth) {
-    const username = atob(auth).split(':')[0];
-    if (isAdmin(username)) {
-      showPrivateMenuItems();
-    } else {
-      hidePrivateMenuItems();
-    }
-  } else {
-    hidePrivateMenuItems();
-  }
+  // Bloquer l'accès aux pages protégées
+  blockProtectedPages();
   
   // Mettre en place l'observateur pour attraper les éléments qui se chargent dynamiquement
-  const observer = setupDOMObserver();
+  setupDOMObserver();
   
-  // Arrêter l'observation après un certain temps pour éviter la surcharge
-  setTimeout(() => {
-    observer.disconnect();
-  }, 5000); // Observer pendant 5 secondes après le chargement initial
-})();
-
-document.addEventListener('DOMContentLoaded', function() {
-  let auth = sessionStorage.getItem('auth');
-  const currentPath = window.location.pathname;
-  
-  // Vérifier l'accès protégé
-  blockProtectedPages();
-  
-  // Si on est déjà sur la page de login, ne pas rediriger
-  if (currentPath.includes('login')) {
-    return;
-  }
-  
-  // Si pas d'authentification, attribuer "guest" par défaut
-  if (!auth) {
-    // Créer les credentials pour guest
-    auth = btoa('guest:guest');
-    sessionStorage.setItem('auth', auth);
-  }
-  
-  // Vérifier le type d'utilisateur
-  const [username, _] = atob(auth).split(':');
-  
-  // Masquer ou afficher les sections privées en fonction du statut de l'utilisateur
-  if (isAdmin(username)) {
-    showPrivateMenuItems();
-  } else {
-    hidePrivateMenuItems();
-  }
-  
-  // Si l'utilisateur n'est pas admin et essaie d'accéder à une page admin
-  if (!isAdmin(username) && PROTECTED_PATHS.some(page => currentPath.includes(page.toLowerCase()))) {
-    alert('Accès refusé: Cette page est réservée aux administrateurs.');
-    window.location.href = '/';
-    return;
-  }
-  
-  // Ajouter l'en-tête d'autorisation à toutes les requêtes fetch
-  const originalFetch = window.fetch;
-  window.fetch = function(url, options = {}) {
-    if (!options.headers) {
-      options.headers = {};
-    }
-    
-    options.headers['Authorization'] = `Basic ${auth}`;
-    return originalFetch(url, options);
-  };
-  
-  // Ajouter un bouton de connexion/déconnexion dans le header
-  const header = document.querySelector('.md-header__inner');
-  if (header) {
-    // Supprimer les boutons existants s'il y en a
-    const existingButton = header.querySelector('.auth-button');
-    if (existingButton) {
-      existingButton.remove();
-    }
-    
-    const existingIndicator = header.querySelector('.user-indicator');
-    if (existingIndicator) {
-      existingIndicator.remove();
-    }
-    
-    // Ajouter le bouton approprié
-    const authButton = document.createElement('button');
-    authButton.className = 'md-header__button md-icon auth-button';
-    authButton.style.marginLeft = 'auto';
-    authButton.style.border = 'none';
-    authButton.style.background = 'transparent';
-    authButton.style.color = 'var(--md-primary-bg-color)';
-    authButton.style.cursor = 'pointer';
-    
-    if (username === 'guest') {
-      // Bouton de connexion pour guest
-      authButton.textContent = 'Connexion';
-      authButton.addEventListener('click', function() {
-        window.location.href = '/login';
+  // Attacher un gestionnaire d'événements au formulaire de connexion s'il existe
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form[name="login"]');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        // Vérifier les identifiants
+        if (username === 'admin' && password === 'test123') {
+          // Admin - accès complet
+          const credentials = btoa(`${username}:${password}`);
+          sessionStorage.setItem('auth', credentials);
+          localStorage.setItem('username', username);
+          window.location.href = '/';
+        } else if (username === 'invite' && password === 'invite123') {
+          // Utilisateur standard - accès limité
+          const credentials = btoa(`${username}:${password}`);
+          sessionStorage.setItem('auth', credentials);
+          localStorage.setItem('username', username);
+          window.location.href = '/';
+        } else {
+          // Identifiants incorrects
+          alert('Nom d\'utilisateur ou mot de passe incorrect');
+        }
       });
-    } else {
-      // Bouton de déconnexion pour les autres
-      authButton.textContent = 'Déconnexion';
-      authButton.addEventListener('click', function() {
-        // Remettre guest par défaut au lieu de supprimer l'auth
-        const guestAuth = btoa('guest:guest');
-        sessionStorage.setItem('auth', guestAuth);
-        window.location.reload();
-      });
-    }
-    
-    header.appendChild(authButton);
-    
-    // Ajouter un indicateur d'utilisateur
-    const userIndicator = document.createElement('span');
-    userIndicator.className = 'user-indicator';
-    userIndicator.textContent = `Connecté en tant que: ${username}`;
-    userIndicator.style.marginRight = '10px';
-    userIndicator.style.color = 'var(--md-primary-bg-color)';
-    header.appendChild(userIndicator);
-  }
-  
-  // Réappliquer le masquage/affichage après le chargement complet
-  window.addEventListener('load', function() {
-    if (isAdmin(username)) {
-      showPrivateMenuItems();
-      // Réappliquer plusieurs fois pour s'assurer que tout est affiché
-      setTimeout(showPrivateMenuItems, 500);
-      setTimeout(showPrivateMenuItems, 1000);
-      setTimeout(showPrivateMenuItems, 2000);
-    } else {
-      hidePrivateMenuItems();
-      // Réappliquer plusieurs fois pour s'assurer que tout est masqué
-      setTimeout(hidePrivateMenuItems, 500);
-      setTimeout(hidePrivateMenuItems, 1000);
-      setTimeout(hidePrivateMenuItems, 2000);
     }
   });
-}); 
+})(); 

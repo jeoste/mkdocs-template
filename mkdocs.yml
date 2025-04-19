@@ -54,5 +54,6 @@ extra:
 
 extra_javascript:
   - assets/js/auth.js
+  - assets/js/netlify-auth.js
 
 copyright: Copyright &copy; 2024 Jeoffrey Stéphan

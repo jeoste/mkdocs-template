@@ -14,6 +14,10 @@ Vous êtes actuellement connecté en tant qu'utilisateur invité (guest). Pour a
     </div>
     <button type="submit" class="md-button md-button--primary">Se connecter</button>
   </form>
+  <div class="login-info">
+    <p><strong>Compte Admin:</strong> Utilisateur: admin / Mot de passe: test123</p>
+    <p><strong>Compte Invité:</strong> Utilisateur: invite / Mot de passe: invite123</p>
+  </div>
 </div>
 
 <script>
@@ -29,11 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
       // Admin - accès complet
       const credentials = btoa(`${username}:${password}`);
       sessionStorage.setItem('auth', credentials);
+      localStorage.setItem('username', username);
       window.location.href = '/';
     } else if (username === 'invite' && password === 'invite123') {
       // Utilisateur standard - accès limité
       const credentials = btoa(`${username}:${password}`);
       sessionStorage.setItem('auth', credentials);
+      localStorage.setItem('username', username);
       window.location.href = '/';
     } else {
       // Identifiants incorrects
@@ -69,8 +75,11 @@ document.addEventListener('DOMContentLoaded', function() {
   border-radius: 4px;
 }
 
-.form-group input[readonly] {
-  background-color: #f0f0f0;
+.login-info {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.9rem;
 }
 
 button {
