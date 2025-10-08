@@ -1,11 +1,12 @@
-site_name: Le Bastion
+site_name: Toute la documentation
 nav:
   - Home: index.md
   - Admonition: admonition.md
   - Private:
-    - Clients:
-      - Uperio: uperio.md
-      - Alliance Marine: alliance-marine.md
+    - Documentation:
+      - DEX: private/dex.md
+      - DCT: private/dct.md
+      - DAT: private/dat.md
   - About: about.md
   - Login: login.md
 theme: 
@@ -55,4 +56,4 @@ extra:
 extra_javascript:
   - assets/js/auth.js
 
-copyright: Copyright &copy; 2024 Jeoffrey Stéphan
+copyright: Copyright &copy; 2025 Jeoffrey Stéphan

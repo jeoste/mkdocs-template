@@ -4,8 +4,8 @@
 const PROTECTED_PATHS = [
   '/private/',
   '/clients/',
-  '/uperio/',
-  '/alliance-marine/',
+  '/technical-spec/',
+  '/functional-spec/',
 ];
 
 // Liste des utilisateurs administrateurs
@@ -35,7 +35,7 @@ function hidePrivateMenuItems() {
   const navItems = document.querySelectorAll('.md-nav__item');
   navItems.forEach(item => {
     const link = item.querySelector('.md-nav__link');
-    if (link && (link.textContent.includes('Private') || link.textContent.includes('Clients') || link.textContent.includes('Uperio') || link.textContent.includes('Alliance Marine'))) {
+    if (link && (link.textContent.includes('Private') || link.textContent.includes('Clients') || link.textContent.includes('Technical spec') || link.textContent.includes('Functional spec'))) {
       item.style.display = 'none';
     }
   });
@@ -50,14 +50,14 @@ function hidePrivateMenuItems() {
     if ((href && (
         href.includes('/private/') || 
         href.includes('/clients/') || 
-        href.includes('/uperio/') || 
-        href.includes('/alliance-marine/')
+        href.includes('/technical-spec/') || 
+        href.includes('/functional-spec/')
       )) || 
       (text && (
         text.includes('Private') || 
         text.includes('Clients') || 
-        text.includes('Uperio') || 
-        text.includes('Alliance Marine')
+        text.includes('Technical spec') || 
+        text.includes('Functional spec')
       ))
     ) {
       // Masquer l'élément lui-même
@@ -93,8 +93,8 @@ function hidePrivateMenuItems() {
       const title = link.querySelector('.md-footer-nav__title');
       if (title && (
           title.textContent.includes('Private') || 
-          title.textContent.includes('Uperio') || 
-          title.textContent.includes('Alliance Marine') || 
+          title.textContent.includes('Technical spec') || 
+          title.textContent.includes('Functional spec') || 
           title.textContent.includes('Clients')
         )) {
         link.style.display = 'none';
@@ -117,7 +117,7 @@ function showPrivateMenuItems() {
   const navItems = document.querySelectorAll('.md-nav__item');
   navItems.forEach(item => {
     const link = item.querySelector('.md-nav__link');
-    if (link && (link.textContent.includes('Private') || link.textContent.includes('Clients') || link.textContent.includes('Uperio') || link.textContent.includes('Alliance Marine'))) {
+    if (link && (link.textContent.includes('Private') || link.textContent.includes('Clients') || link.textContent.includes('Technical spec') || link.textContent.includes('Functional spec'))) {
       item.style.display = '';
     }
   });
@@ -132,14 +132,14 @@ function showPrivateMenuItems() {
     if ((href && (
         href.includes('/private/') || 
         href.includes('/clients/') || 
-        href.includes('/uperio/') || 
-        href.includes('/alliance-marine/')
+        href.includes('/technical-spec/') || 
+        href.includes('/functional-spec/')
       )) || 
       (text && (
         text.includes('Private') || 
         text.includes('Clients') || 
-        text.includes('Uperio') || 
-        text.includes('Alliance Marine')
+        text.includes('Technical spec') || 
+        text.includes('Functional spec')
       ))
     ) {
       // Afficher l'élément

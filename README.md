@@ -1,50 +1,49 @@
-# Bastion Official MkDocs Specs
+# MkDocs Template
 
-Ce projet contient toutes les documentations officielles de mes clients, construite au fil des ans et utilisant MkDocs et le thème Material.
+This project contains my MkDocs template with Material theme.
+I'm using this template and theme for my client if they want to host their documentation internally, as a viable alternative to Microsoft Word (still mostly used)
 
-## 🚀 Installation
+## I. : Installation
 
-1. Assurez-vous d'avoir Python installé sur votre système
-2. Installez MkDocs et les dépendances nécessaires :
+1. Make sure Python is installed on your system
+2. Install MkDocs and the required dependencies:
 ```bash
 pip install mkdocs
 pip install mkdocs-material
 ```
 
-## 📚 Utilisation
+## II. : Usage
 
-### Développement local
-Pour lancer un serveur de développement local avec rechargement automatique :
+### A. : Local development
+To start a local development server with live reload:
+
 ```bash
 mkdocs serve
 ```
 
-### Construction de la documentation
-Pour construire la documentation en site statique :
+### B. : Building the documentation
+
+To build the documentation as a static site:
 ```bash
 mkdocs build
 ```
 
-## 📁 Structure du projet
+## III. : Project structure
 
 ```
 .
-├── mkdocs.yml    # Configuration de MkDocs
-└── docs/         # Contenu de la documentation
-    ├── index.md  # Page d'accueil
-    └── ...       # Autres pages de documentation
+├── mkdocs.yml    # MkDocs configuration
+└── docs/         # Documentation content
+    ├── index.md  # Home page
+    └── ...       # Other documentation pages
 ```
 
-## 🔧 Configuration
+## IV. : Configuration
 
-La configuration principale se trouve dans le fichier `mkdocs.yml`. Consultez la [documentation officielle de MkDocs](https://www.mkdocs.org) pour plus de détails.
+The main configuration is located in the `mkdocs.yml` file. See the [official MkDocs documentation](https://www.mkdocs.org) for more details.
 
-## 📝 Ressources utiles
+## V. : Useful resources
 
-- [Documentation MkDocs](https://www.mkdocs.org)
-- [Thème Material pour MkDocs](https://squidfunk.github.io/mkdocs-material/)
-- [Guide de démarrage avec Material](https://jameswillett.dev/getting-started-with-material-for-mkdocs/)
-
-## 🤝 Contribution
-
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request. 
+- [MkDocs Documentation](https://www.mkdocs.org)
+- [Material for MkDocs theme](https://squidfunk.github.io/mkdocs-material/)
+- [Getting started guide with Material](https://jameswillett.dev/getting-started-with-material-for-mkdocs/)
