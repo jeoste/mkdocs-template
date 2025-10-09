@@ -23,20 +23,17 @@ document.addEventListener('DOMContentLoaded', function() {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    
-    // Vérifier les identifiants
+
+    // Vérifier les identifiants (UI seulement)
     if (username === 'admin' && password === 'test123') {
-      // Admin - accès complet
-      const credentials = btoa(`${username}:${password}`);
-      sessionStorage.setItem('auth', credentials);
+      sessionStorage.setItem('authRole', 'admin');
+      sessionStorage.setItem('authUsername', 'admin');
       window.location.href = '/';
     } else if (username === 'invite' && password === 'invite123') {
-      // Utilisateur standard - accès limité
-      const credentials = btoa(`${username}:${password}`);
-      sessionStorage.setItem('auth', credentials);
+      sessionStorage.setItem('authRole', 'guest');
+      sessionStorage.setItem('authUsername', 'invite');
       window.location.href = '/';
     } else {
-      // Identifiants incorrects
       alert('Nom d\'utilisateur ou mot de passe incorrect');
     }
   });
@@ -84,4 +81,4 @@ button {
   cursor: pointer;
   font-weight: 600;
 }
-</style> 
+</style>

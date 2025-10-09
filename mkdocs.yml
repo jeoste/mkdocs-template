@@ -1,4 +1,4 @@
-site_name: Toute la documentation
+site_name: Documentation [client] | Projet [project_name]
 nav:
   - Home: index.md
   - Admonition: admonition.md

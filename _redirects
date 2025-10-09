@@ -1,3 +1,5 @@
-# Rediriger vers la page de connexion personnalisée en cas d'accès non autorisé
+# Route de la page de connexion personnalisée
 /login /login.html 200
-/* /index.html 401! 
+
+# Les sections protégées sont gérées par Netlify Basic Auth (netlify.toml)
+# Pas de réécriture globale en 401 pour éviter de bloquer tout le site

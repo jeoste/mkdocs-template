@@ -10,8 +10,23 @@
 [[plugins]]
   package = "netlify-plugin-inline-critical-css"
 
-# Configuration pour l'authentification HTTP Basic
+# Configuration d'authentification HTTP Basic pour les sections protégées
 [[headers]]
-  for = "/*"
+  for = "/private/*"
   [headers.values]
-    Basic-Auth = "admin:test123, guest:guest"
+    Basic-Auth = "admin:test123"
+
+[[headers]]
+  for = "/technical-spec/*"
+  [headers.values]
+    Basic-Auth = "admin:test123"
+
+[[headers]]
+  for = "/functional-spec/*"
+  [headers.values]
+    Basic-Auth = "admin:test123"
+
+[[headers]]
+  for = "/clients/*"
+  [headers.values]
+    Basic-Auth = "admin:test123"
