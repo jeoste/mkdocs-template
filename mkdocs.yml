@@ -1,4 +1,4 @@
-site_name: Documentation [client] | Projet [project_name]
+site_name: MkDocs Template Documentation
 nav:
   - Home: index.md
   - Admonition: admonition.md
