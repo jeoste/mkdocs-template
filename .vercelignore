@@ -1,0 +1,11 @@
+# Fichiers à ignorer lors du déploiement Vercel
+netlify.toml
+netlify-build.sh
+_redirects
+site/
+*.pyc
+__pycache__/
+.python-version
+venv/
+env/
+
